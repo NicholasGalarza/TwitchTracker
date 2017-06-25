@@ -1,0 +1,64 @@
+html {
+    margin: 0 auto;
+}
+
+body {
+    background-color: #666699;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+h1 {
+    text-align: center;
+}
+
+#twitch-table {
+    height: 200px;
+    width: 100%;
+    display: table;
+    /* horizontally center */
+    margin: auto;
+    background-color: white;
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    border-collapse: collapse;
+    width: 2000px; 
+    padding: 4px;
+    background-color: black;
+    color: white;
+    padding: 30px;
+    vertical-align: top;
+    text-align: center;
+}
+
+td:hover {
+  background-color: red;
+
+}
+
+td:nth-child(1) {
+  border-radius: 10px 0 0 0;
+}
+
+td:nth-child(2) {
+  border-left: 0.5px solid white;
+  border-right: 0.5px solid white;
+}
+
+td:nth-child(3) {
+  border-radius: 0 10px 0 0;
+}
+
+@media (min-width: 500px) {
+    #twitch-table {
+        width: 80%;
+    }
+}
