@@ -7,16 +7,20 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Orbitron" rel="stylesheet">
 </head>
 
 <body>
     <div class="wrapper">
+        <header>
+            <h1>Twitch <i class="fa fa-twitch" aria-hidden="true"></i> Track</h1>
+        </header>
         <div class="container">
-            <h1><i class="fa fa-twitch" aria-hidden="true"></i> Viewer</h1>
+
             <div class="tab">
-                <button class="tablinks" id="defaultOpen" onclick="openCity(event, 'All')">All</button>
-                <button class="tablinks" onclick="openCity(event, 'Online')">Online</button>
-                <button class="tablinks" onclick="openCity(event, 'Offline')">Offline</button>
+                <button class="tablinks" id="defaultOpen" onclick="getTwitchStreamers(event, 'All')">All</button>
+                <button class="tablinks" onclick="getTwitchStreamers(event, 'Online')">Online</button>
+                <button class="tablinks" onclick="getTwitchStreamers(event, 'Offline')">Offline</button>
             </div>
 
             <div id="All" class="tabcontent">
@@ -35,6 +39,9 @@
                 <p>Tokyo is the capital of Japan.</p>
             </div>
         </div>
+        <footer>
+            <p>Written &amp; coded by Nicholas Galarza</p>
+        </footer>
     </div>
     <script type="text/javascript" src="js/twitch.js"></script>
 </body>

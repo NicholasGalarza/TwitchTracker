@@ -1,4 +1,4 @@
-function openCity(evt, cityName) {
+function getTwitchStreamers(evt, cityName) {
     var i, tabcontent, tablinks;
 
     // Get all elements with class="tabcontent" and hide them

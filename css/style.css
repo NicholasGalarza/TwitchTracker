@@ -3,8 +3,25 @@
     }
 
     body {
-        background-color: rgb(65, 69, 76);
+        background-color: snow;
         height: 100%;
+        margin: 0 auto;
+        padding: 0;
+        font-family: 'Orbitron', sans-serif;
+    }
+
+    header {
+      background-color: #6034b1;
+      margin: 0 auto;
+      padding: 15px;
+    }
+
+    footer {
+      color: black;
+      font-family: 'Josefin Sans', sans-serif;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
     }
 
     .wrapper {
@@ -13,7 +30,7 @@
 
     .container {
         display: inline-block;
-        width: 90%;
+        width: 95%;
     }
 
     h1 {
@@ -36,11 +53,16 @@
     div.tab {
         overflow: hidden;
         border: 1px solid #ccc;
-        background-color: #f1f1f1;
+        background-color: #815fc0;
+        margin-top: 12px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
     }
 
     div.tab button {
         background-color: inherit;
+        color: snow;
+        font-size: 22px;
         float: middle;
         width: 32.3%;
         border: none;
@@ -51,16 +73,17 @@
     }
 
     div.tab button:hover {
-        background-color: #ddd;
+        background-color: #6441a5;
     }
 
     div.tab button.active {
-        background-color: #ccc;
+        background-color: #4b307b;
     }
 
     .tabcontent {
         display: none;
         padding: 6px 12px;
+        font-family: sans-serif;
         border: 1px solid #ccc;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
@@ -85,4 +108,10 @@
         to {
             opacity: 1;
         }
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        width: 768px;
+      }
     }
