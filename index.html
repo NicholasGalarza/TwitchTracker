@@ -5,21 +5,38 @@
     <meta charset="utf-8">
     <title>Twitch.tv Tracker</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
-    <h1>Twitch.tv Viewer</h1>
+    <div class="wrapper">
+        <div class="container">
+            <h1><i class="fa fa-twitch" aria-hidden="true"></i> Viewer</h1>
+            <div class="tab">
+                <button class="tablinks" id="defaultOpen" onclick="openCity(event, 'All')">All</button>
+                <button class="tablinks" onclick="openCity(event, 'Online')">Online</button>
+                <button class="tablinks" onclick="openCity(event, 'Offline')">Offline</button>
+            </div>
 
-    <nav role="navigation" id="twitch-table">
-        <table>
-            <tr>
-                <td>All</td>
-                <td>Online</td>
-                <td>Offline</td>
-            </tr>
-        </table>
-    </nav>
+            <div id="All" class="tabcontent">
+                <h3>London</h3>
+                <p>London is the capital city of England.</p>
+                <p>Stuff will have to be dynamically loaded in here</p>
+            </div>
 
+            <div id="Online" class="tabcontent">
+                <h3>Paris</h3>
+                <p>Paris is the capital of France.</p>
+            </div>
+
+            <div id="Offline" class="tabcontent">
+                <h3>Tokyo</h3>
+                <p>Tokyo is the capital of Japan.</p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/twitch.js"></script>
 </body>
 
 </html>
