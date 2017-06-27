@@ -18,31 +18,29 @@
         <div class="container">
 
             <div class="tab">
-                <button class="tablinks" id="defaultOpen" onclick="getTwitchStreamers(event, 'All')">All</button>
+                <button class="tablinks" id="defaultOpen" onclick="getTwitchStreamers(event, 'All')"><i class="fa fa-free-code-camp fa-lg" aria-hidden="true"></i></button>
                 <button class="tablinks" onclick="getTwitchStreamers(event, 'Online')">Online</button>
                 <button class="tablinks" onclick="getTwitchStreamers(event, 'Offline')">Offline</button>
             </div>
 
             <div id="All" class="tabcontent">
-                <h3>London</h3>
-                <p>London is the capital city of England.</p>
-                <p>Stuff will have to be dynamically loaded in here</p>
+                <div id="freeCodeCamp"></div>
+                <div id="followers"></div>
             </div>
 
             <div id="Online" class="tabcontent">
-                <h3>Paris</h3>
-                <p>Paris is the capital of France.</p>
+                <div id="onlineStreamers"></div>
             </div>
 
             <div id="Offline" class="tabcontent">
-                <h3>Tokyo</h3>
-                <p>Tokyo is the capital of Japan.</p>
+                <div id="offlineStreamers"></div>
             </div>
         </div>
         <footer>
             <p>Written &amp; coded by Nicholas Galarza</p>
         </footer>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/twitch.js"></script>
 </body>
 
