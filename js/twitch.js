@@ -1,4 +1,4 @@
-function getTwitchStreamers(evt, cityName) {
+function getTwitchStreamers(clickEvent, streamList) {
     var i, tabcontent, tablinks;
 
     // Get all elements with class="tabcontent" and hide them
@@ -13,8 +13,8 @@ function getTwitchStreamers(evt, cityName) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
+    document.getElementById(streamList).style.display = "block";
+    clickEvent.currentTarget.className += " active";
 }
 
 document.getElementById("defaultOpen").click();

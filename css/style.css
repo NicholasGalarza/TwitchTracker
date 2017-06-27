@@ -17,7 +17,7 @@
     }
 
     footer {
-      color: black;
+      color: #6da5ff;
       font-family: 'Josefin Sans', sans-serif;
       position: fixed;
       bottom: 0;
@@ -30,7 +30,7 @@
 
     .container {
         display: inline-block;
-        width: 95%;
+        width: 97%;
     }
 
     h1 {
@@ -84,7 +84,7 @@
         display: none;
         padding: 6px 12px;
         font-family: sans-serif;
-        border: 1px solid #ccc;
+        border: 1px solid #727272;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         border-top: none;
