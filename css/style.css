@@ -11,17 +11,17 @@
     }
 
     header {
-      background-color: #6034b1;
-      margin: 0 auto;
-      padding: 15px;
+        background-color: #6034b1;
+        margin: 0 auto;
+        padding: 15px;
     }
 
     footer {
-      color: #6da5ff;
-      font-family: 'Josefin Sans', sans-serif;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
+        color: #6da5ff;
+        font-family: 'Josefin Sans', sans-serif;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
     }
 
     .wrapper {
@@ -31,6 +31,21 @@
     .container {
         display: inline-block;
         width: 97%;
+    }
+
+    .profile {
+        display: inline-block;
+        text-align: right;
+    }
+
+    .profile img {
+      margin-top: 15px;
+    }
+
+    .profile #logo {
+        float: left;
+        height: 100px;
+        width: 100px;
     }
 
     h1 {
@@ -111,7 +126,7 @@
     }
 
     @media (min-width: 768px) {
-      .container {
-        width: 768px;
-      }
+        .container {
+            width: 768px;
+        }
     }

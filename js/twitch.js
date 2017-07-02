@@ -1,3 +1,4 @@
+'use strict'
 function getTwitchStreamers(clickEvent, streamList) {
     var i, tabcontent, tablinks;
 
@@ -36,11 +37,15 @@ $(document).ready(function() {
             name = data.name;
             bio = data.bio;
             logo = data.logo;
+            $('#logo').html('<img src=\"' + data.logo + "\" height=\"100px\" width=\"100px\">");
+            $('#freeCodeCamp').html('<h3>' + data.name + "</h3>");
+            $('#bio').html('<h3>').html('<p>' + data.bio + "</p>");
         }
+
     });
 
     // Get freeCodeCamp's followers
-    $('#All').html("<p>Targeting all streamers</p>");
+
     var url = "https://api.twitch.tv/kraken/users/freecodecamp/follows/channels";
     $.ajax({
         type: 'GET',
@@ -51,11 +56,7 @@ $(document).ready(function() {
         async: true,
         success: function(data) {
             console.log(data);
-            if (data.stream === null) {
-                $('#All').html("FCC is offline!");
-            } else {
-                $('#All').html("FCC is online!");
-            }
+
         }
     });
 
