@@ -2,49 +2,47 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>Twitch.tv Tracker</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Orbitron" rel="stylesheet">
+  <meta charset="utf-8">
+  <title>Twitch.tv Tracker</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Orbitron" rel="stylesheet">
 </head>
 
 <body>
-    <div class="wrapper">
-        <header>
-            <h1>Twitch <i class="fa fa-twitch" aria-hidden="true"></i> Tracker</h1>
-        </header>
-        <div class="container">
-
-            <div class="tab">
-                <button class="tablinks" id="defaultOpen" onclick="getTwitchStreamers(event, 'All')"><i class="fa fa-free-code-camp fa-lg" aria-hidden="true"></i></button>
-                <button class="tablinks" onclick="getTwitchStreamers(event, 'Online')">Online</button>
-                <button class="tablinks" onclick="getTwitchStreamers(event, 'Offline')">Offline</button>
-            </div>
-
-            <div id="All" class="tabcontent">
-                <div class="profile">
-                    <div id="logo"></div>
-                    <div id="freeCodeCamp"></div>
-                    <div id="bio"></div>
-                </div>
-            </div>
-
-            <div id="Online" class="tabcontent">
-                <div id="onlineStreamers"></div>
-            </div>
-
-            <div id="Offline" class="tabcontent">
-                <div id="offlineStreamers"></div>
-            </div>
+  <div class="wrapper">
+    <header>
+      <h1>Twitch <i class="fa fa-twitch" aria-hidden="true"></i> Tracker</h1>
+    </header>
+    <div class="container">
+      <div class="tab">
+        <button class="tablinks" id="defaultOpen" onclick="getTwitchStreamers(event, 'All')"><i class="fa fa-free-code-camp fa-lg" aria-hidden="true"></i></button>
+        <button class="tablinks" onclick="getTwitchStreamers(event, 'Online')">Online</button>
+        <button class="tablinks" onclick="getTwitchStreamers(event, 'Offline')">Offline</button>
+      </div>
+      <div id="All" class="tabcontent">
+        <div class="profile">
+          <div id="logo"></div>
+          <div id="title"></div>
+          <div id="status"></div>
         </div>
-        <footer>
-            <p>Written &amp; coded by Nicholas Galarza</p>
-        </footer>
+      </div>
+
+      <div id="Online" class="tabcontent">
+        <div id="onlineStreamers"></div>
+      </div>
+
+      <div id="Offline" class="tabcontent">
+        <div id="offlineStreamers"></div>
+      </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/twitch.js"></script>
+    <footer>
+      <p>Written &amp; coded by Nicholas Galarza</p>
+    </footer>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/twitch.js"></script>
 </body>
 
 </html>
