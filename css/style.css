@@ -1,19 +1,21 @@
     html {
-      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
+    *, *:before, *:after {
+      box-sizing: inherit;
     }
 
     body {
-      background-color: snow;
+      background-color: white;
       height: 100%;
       margin: 0 auto;
-      padding: 0;
       font-family: 'Orbitron', sans-serif;
     }
 
     header {
       background-color: #6034b1;
       margin: 0 auto;
-      padding: 15px;
     }
 
     footer {
@@ -24,38 +26,9 @@
       width: 100%;
     }
 
-    .wrapper {
-      text-align: center;
-    }
-
     .container {
       display: inline-block;
-      width: 97%;
-    }
-
-    .profile {
-      display: inline-block;
-      border: 1px solid black;
       width: 100%;
-    }
-
-    .profile #logo {
-      text-align: left;
-      float: left;
-      height: 100px;
-      width: 100px;
-    }
-
-    .profile #title {
-      color: red;
-      vertical-align: middle;
-    }
-
-    .profile #status {
-      text-align: right;
-      float: right;
-      margin-right: 10px;
-      
     }
 
     h1 {
@@ -117,6 +90,47 @@
       animation: fadeEffect 1s;
     }
 
+    .wrapper {
+      max-width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+      text-align: center;
+    }
+
+    .wrapper .streamer {}
+
+    .wrapper .streamer:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+    .wrapper .streamer .grid-item {
+      float: left;
+      /* adding split gutters via margin */
+      width: calc((100% - 10px * 3) / 3);
+      margin-right: 5px;
+      margin-left: 5px;
+    }
+
+    .streamer .logo {
+      text-align: left;
+    }
+
+    .streamer .info {}
+    /* Use table to center align the status tab */
+
+    .streamer .status {
+      display: table;
+      text-align: right;
+      height: 100px;
+    }
+
+    .streamer .status i {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
     @-webkit-keyframes fadeEffect {
       from {
         opacity: 0;
@@ -135,8 +149,8 @@
       }
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 1000px) {
       .container {
-        width: 768px;
+        width: 1000px;
       }
     }

@@ -6,8 +6,12 @@
   <title>Twitch.tv Tracker</title>
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Orbitron" rel="stylesheet">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -16,18 +20,23 @@
       <h1>Twitch <i class="fa fa-twitch" aria-hidden="true"></i> Tracker</h1>
     </header>
     <div class="container">
+      <!-- TODO add in a search bar so user may search for a specific twitch account -->
       <div class="tab">
         <button class="tablinks" id="defaultOpen" onclick="getTwitchStreamers(event, 'All')"><i class="fa fa-free-code-camp fa-lg" aria-hidden="true"></i></button>
         <button class="tablinks" onclick="getTwitchStreamers(event, 'Online')">Online</button>
         <button class="tablinks" onclick="getTwitchStreamers(event, 'Offline')">Offline</button>
       </div>
+
       <div id="All" class="tabcontent">
-        <div class="profile">
-          <div id="logo"></div>
-          <div id="title"></div>
-          <div id="status"></div>
+        <div class="wrapper">
+          <div class="streamer">
+            <div class="grid-item logo" id="logo"></div>
+            <div class="grid-item info" id="title"></div>
+            <div class="grid-item status" id="status"></div>
+          </div>
         </div>
       </div>
+
 
       <div id="Online" class="tabcontent">
         <div id="onlineStreamers"></div>
@@ -42,6 +51,9 @@
     </footer>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
   <script type="text/javascript" src="js/twitch.js"></script>
 </body>
 

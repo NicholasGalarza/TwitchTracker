@@ -21,9 +21,16 @@ function getTwitchStreamers(clickEvent, streamList) {
 
 document.getElementById("defaultOpen").click();
 
+// TODO: If a user is online, display what they are streaming.
+// TODO: Edit html & css files so that rendered files are better layed out upon load.
+// TODO: Display data for FreeCodeCamp's followers.
+// TODO: Figure out how to gather a list of currently active users (preferably random).
+// TODO: Figure out how to gather a list of offline users.
+// TODO: Create a search bar in case a user wants to find a certain user and display if the account is closed.
 $(document).ready(function() {
   var logo, name, status;
-  // Determine if specified user is online.
+  // This is a callback function to determine if user is online after recieving
+  // the streamer's logo and title.
   function isUserOnline(data) {
     name = data.name;
     logo = data.logo;
