@@ -12,7 +12,7 @@ function getTwitchStreamers(clickEvent, streamList) {
   // Get all elements with class="tablinks" and remove the class "active"
   tablinks = document.getElementsByClassName("tablinks");
   for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
+    tablinks[i].className = tablinks[i].className.replace("active", "");
   }
   // Show the current tab, and add an "active" class to the button that opened the tab
   document.getElementById(streamList).style.display = "block";
@@ -21,7 +21,7 @@ function getTwitchStreamers(clickEvent, streamList) {
 
 // Event listener for button clicks.
 document.getElementById("defaultOpen").addEventListener("click", function() {
-  getTwitchStreamers("click", 'fcc');
+  getTwitchStreamers(event, 'fcc');
 })
 // click automatically upon page load.
 document.getElementById("defaultOpen").click();
@@ -40,7 +40,7 @@ $(document).ready(function() {
   function isUserOnline(data) {
     name = data.name;
     logo = data.logo;
-    $('#logo').html('<img src=\"' + data.logo + "\" height=\"80px\" width=\"80px\">");
+    $('#logo').html('<img src=\"' + data.logo + "\">");
     $('#title').html('<h3>' + data.name + "</h3>");
 
     var url = 'https://api.twitch.tv/kraken/streams/' + data.name;
