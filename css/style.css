@@ -26,7 +26,7 @@
       width: 100%;
     }
 
-    .container {
+    .display {
       display: inline-block;
       width: 100%;
     }
@@ -90,43 +90,32 @@
       animation: fadeEffect 1s;
     }
 
-    .wrapper {
+    .row {
+      margin-left: .5px;
+      margin-right: .5px;
+    }
+
+    .tabcontent h3, p {
+      font-size: 1.5rem;
+    }
+
+    .main {
       max-width: 100%;
       margin-right: auto;
       margin-left: auto;
       text-align: center;
     }
 
-    .wrapper .streamer {}
-
-    .wrapper .streamer:after {
-      content: '';
-      display: table;
-      clear: both;
-    }
-
-    .wrapper .streamer .grid-item {
-      float: left;
-      /* adding split gutters via margin */
-      width: calc((100% - 10px * 3) / 3);
-      margin-right: 5px;
-      margin-left: 5px;
-    }
-
-    .streamer .logo {
+    #logo {
       text-align: left;
     }
 
-    .streamer .info {}
-    /* Use table to center align the status tab */
-
-    .streamer .status {
+    #status {
       display: table;
-      text-align: right;
       height: 100px;
     }
 
-    .streamer .status i {
+    #status i {
       display: table-cell;
       vertical-align: middle;
     }
@@ -150,7 +139,7 @@
     }
 
     @media (min-width: 1000px) {
-      .container {
+      .display {
         width: 1000px;
       }
     }

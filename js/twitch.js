@@ -16,10 +16,16 @@ function getTwitchStreamers(clickEvent, streamList) {
   }
   // Show the current tab, and add an "active" class to the button that opened the tab
   document.getElementById(streamList).style.display = "block";
-  clickEvent.currentTarget.className += " active";
+  clickEvent.currentTarget.className += "active";
 }
 
+// Event listener for button clicks.
+document.getElementById("defaultOpen").addEventListener("click", function() {
+  getTwitchStreamers("click", 'fcc');
+})
+// click automatically upon page load.
 document.getElementById("defaultOpen").click();
+
 
 // TODO: If a user is online, display what they are streaming.
 // TODO: Edit html & css files so that rendered files are better layed out upon load.
@@ -34,7 +40,7 @@ $(document).ready(function() {
   function isUserOnline(data) {
     name = data.name;
     logo = data.logo;
-    $('#logo').html('<img src=\"' + data.logo + "\" height=\"100px\" width=\"100px\">");
+    $('#logo').html('<img src=\"' + data.logo + "\" height=\"80px\" width=\"80px\">");
     $('#title').html('<h3>' + data.name + "</h3>");
 
     var url = 'https://api.twitch.tv/kraken/streams/' + data.name;
@@ -72,7 +78,6 @@ $(document).ready(function() {
   };
 
   getNameAndLogo(); // starts here.
-
 
   // Get freeCodeCamp's followers
   var url = "https://api.twitch.tv/kraken/users/freecodecamp/follows/channels";
