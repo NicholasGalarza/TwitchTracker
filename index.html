@@ -23,13 +23,14 @@
       <!-- TODO: finish adding the event listeers for the three tab buttons. -->
       <div class="tab">
         <button class="tablinks" id="defaultOpen"><i class="fa fa-free-code-camp fa-lg" aria-hidden="true"></i></button>
-        <button class="tablinks" onclick="getTwitchStreamers(event, 'Online')">Online</button>
-        <button class="tablinks" onclick="getTwitchStreamers(event, 'Offline')">Offline</button>
+        <button class="tablinks" onclick="getTwitchStreamers(event, 'Online')">Popular</button>
+        <button class="tablinks" onclick="getTwitchStreamers(event, 'Offline')">Featured</button>
       </div>
 
       <div id="fcc" class="container-fluid tabcontent">
         <div class="row center-block">
-          <div id="logo" class="col-xs-3 col-sm-2">
+          <div class="link-effect">
+            <div id="logo" class="col-xs-3 col-sm-2"></div>
           </div>
           <div id="title" class="col-xs-6 col-sm-8 center-block">
           </div>
@@ -37,6 +38,7 @@
             <div id="status"></div>
           </div>
         </div>
+        <div class="fcc-followers-dropoff"></div>
       </div>
 
 

@@ -15,14 +15,14 @@ function getTwitchStreamers(clickEvent, streamList) {
     tablinks[i].className = tablinks[i].className.replace("active", "");
   }
   // Show the current tab, and add an "active" class to the button that opened the tab
-  document.getElementById(streamList).style.display = "block";
   clickEvent.currentTarget.className += "active";
+  document.getElementById(streamList).style.display = "block";
 }
 
 // Event listener for button clicks.
 document.getElementById("defaultOpen").addEventListener("click", function() {
   getTwitchStreamers(event, 'fcc');
-})
+});
 // click automatically upon page load.
 document.getElementById("defaultOpen").click();
 
@@ -37,7 +37,7 @@ $(document).ready(function() {
   var logo, name, status;
   // This is a callback function to determine if user is online after recieving
   // the streamer's logo and title.
-  function isUserOnline(data) {
+  function isFccOnline(data) {
     name = data.name;
     logo = data.logo;
     $('#logo').html('<img src=\"' + data.logo + "\">");
@@ -62,6 +62,7 @@ $(document).ready(function() {
     });
   };
 
+  // This method is specifically for FreeCodeCamp.
   function getNameAndLogo() {
     var url = "https://api.twitch.tv/kraken/users/freecodecamp";
     $.ajax({
@@ -72,13 +73,37 @@ $(document).ready(function() {
       },
       async: true,
       success: function(data) {
-        isUserOnline(data); // This is the callback
+        isFccOnline(data); // This is the callback
       }
     });
   };
 
   getNameAndLogo(); // starts here.
 
+  function areUsersOnline(data) {
+    name = data.name;
+    logo = data.logo;
+    $('#logo').html('<img src=\"' + data.logo + "\">");
+    $('#title').html('<h3>' + data.name + "</h3>");
+
+    var url = 'https://api.twitch.tv/kraken/streams/' + data.name;
+    $.ajax({
+      type: 'GET',
+      url: url,
+      headers: {
+        'Client-ID': 'sh9x4gbft40ht9pg5mk0p6sfvn1h3a'
+      },
+      async: true,
+      success: function(data) {
+        var status = (data.stream === null) ? false : true;
+        if (status) { // if online
+          $('#status').html('<i class="fa fa-globe" aria-hidden="true"></i>');
+        } else {
+          $('#status').html('<i class="fa fa-bolt fa-3x" aria-hidden="true"></i>');
+        }
+      }
+    });
+  }
   // Get freeCodeCamp's followers
   var url = "https://api.twitch.tv/kraken/users/freecodecamp/follows/channels";
   $.ajax({
@@ -90,8 +115,35 @@ $(document).ready(function() {
     async: true,
     success: function(data) {
       var followers = data.follows;
+      var renderFollowers = [];
+      var logo, link, name, isOnline;
+      logo = link = name = [];
 
       console.log(followers);
+      for (var i = 0; i < followers.length; i++) {
+        logo = followers[i].channel.logo || 'https://www.appointbetterboards.co.nz/Custom/Appoint/img/avatar-large.png';
+        link = followers[i].channel.url;
+        name = followers[i].channel.name;
+        console.log(logo);
+        renderFollowers.push(
+          '<div class="row center-block">' +
+            '<div class="link-effect">' +
+              '<div id="logo" class="col-xs-3 col-sm-2">' +
+                '<a href="' + link + '" target="_blank">' +
+                  '<img src="' + logo + '">' +
+                '</a>'+
+              '</div>' +
+            '</div>' +
+            '<div id="title" class="col-xs-6 col-sm-8 center-block">' + name  +
+            '</div>' +
+              '<div id="status" class="col-xs-3 col-sm-1">' +
+                '<div id="status"></div>' +
+              '</div>' +
+            '</div>' +
+          '</div>'
+        );
+        $('.fcc-followers-dropoff').html(renderFollowers.join(""));
+      }
     }
   });
 

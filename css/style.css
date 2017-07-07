@@ -27,11 +27,8 @@
 
     footer {
       color: #6034b1;
-      padding-top: 5px;
+      padding-top: 10px;
       font-family: 'Josefin Sans', sans-serif;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
     }
 
     .display {
@@ -102,6 +99,8 @@
 
     .row {
       padding: 10px 0;
+      -webkit-animation: fadeEffect 3s;
+      animation: fadeEffect 3s;
     }
 
     .tabcontent h3, p {
@@ -121,7 +120,7 @@
     }
 
     #logo img:hover {
-      
+
     }
 
     #title {
