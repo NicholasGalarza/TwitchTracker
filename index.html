@@ -22,9 +22,9 @@
       <!-- TODO add in a search bar so user may search for a specific twitch account -->
       <!-- TODO: finish adding the event listeers for the three tab buttons. -->
       <div class="tab">
-        <button class="tablinks" id="defaultOpen"><i class="fa fa-free-code-camp fa-lg" aria-hidden="true"></i></button>
-        <button class="tablinks" onclick="getTwitchStreamers(event, 'Online')">Popular</button>
-        <button class="tablinks" onclick="getTwitchStreamers(event, 'Offline')">Featured</button>
+        <button class="tablinks" id="fccButton"><i class="fa fa-free-code-camp fa-lg" aria-hidden="true"></i></button>
+        <button class="tablinks" id="popularButton">Popular</button>
+        <button class="tablinks" id="featuredButton">Featured</button>
       </div>
 
       <div id="fcc" class="container-fluid tabcontent">
@@ -41,15 +41,17 @@
         <div class="fcc-followers-dropoff"></div>
       </div>
 
-
-
-
-      <div id="Online" class="tabcontent">
-        <div id="onlineStreamers"></div>
+      <div id="popular" class="tabcontent">
+        <div id="popularStreamerList">
+          <p>hello popular world</p>
+        </div>
       </div>
 
-      <div id="Offline" class="tabcontent">
-        <div id="offlineStreamers"></div>
+      <div id="featured" class="tabcontent">
+        <div id="featuredStreamerList">
+          <p>hello featured world</p>
+
+        </div>
       </div>
     </div>
     <footer>
