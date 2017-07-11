@@ -33,7 +33,6 @@ $(document).ready(function() {
   // Open panel of default button automatically
   document.getElementById("fccButton").click();
 
-
   // TODO: If a user is online, display what they are streaming.
   // TODO: Edit html & css files so that rendered files are better layed out upon load.
   // TODO: Display data for FreeCodeCamp's followers.
@@ -42,6 +41,13 @@ $(document).ready(function() {
 
   var CLIENT_ID = 'sh9x4gbft40ht9pg5mk0p6sfvn1h3a';
   var logo, name, status;
+  // TODO: Modular rendering function to reduce lines of code.
+  /* Takes in an array or single value representing info about a streamer.
+   * Parse the information and construct the html with updated field values.
+   * Utilziing JQuery, we can parse that information into the DOM and create a list.
+   */
+  function renderUser(target, data) {}
+
   // This is a callback function to determine if user is online after recieving
   // the streamer's logo and title.
   function isFccOnline(data) {
@@ -58,11 +64,10 @@ $(document).ready(function() {
         'Client-ID': CLIENT_ID
       },
       async: true,
-      success: function(data) {
-        var status = (data.stream === null) ? false : true;
-        if (status) { // if online
-          $('#status').html('<i class="fa fa-globe" aria-hidden="true"></i>');
-        } else {
+      success: function(status) {
+        if (status.stream !== null) { // if online
+          $('#status').html('<i class="fa fa-globe fa-2x" aria-hidden="true"></i>');
+        } else { // if offline
           $('#status').html('<i class="fa fa-bolt fa-3x" aria-hidden="true"></i>');
         }
       }
@@ -80,6 +85,7 @@ $(document).ready(function() {
       },
       async: true,
       success: function(data) {
+        console.log("FCC", data);
         isFccOnline(data); // This is the callback
       }
     });
@@ -88,25 +94,59 @@ $(document).ready(function() {
   getNameAndLogo(); // starts here.
   getFccFollowers();
 
-  function areUsersOnline(streamer) {
-    var url = 'https://api.twitch.tv/kraken/streams/' + streamer;
-    $.ajax({
-      type: 'GET',
-      url: url,
-      headers: {
-        'Client-ID': CLIENT_ID
-      },
-      async: true,
-      success: function(data) {
-        console.log(streamer, data);
-        var status = (data.stream === null) ? false : true;
-        if (status) { // if online
-          $('#status').html('<i class="fa fa-globe" aria-hidden="true"></i>');
-        } else { // if offine
-          $('#status').html('<i class="fa fa-bolt fa-3x" aria-hidden="true"></i>');
-        }
-      }
+  function areUsersOnline(data) {
+    const streamers = data.follows;
+    let renderFollowers = [],
+      logo, link, name, followers, views, isOnline;
+
+    // Render corresponding data for each follower of fcc.
+    streamers.forEach(function(streamer) {
+      logo = streamer.channel.logo || 'https://www.appointbetterboards.co.nz/Custom/Appoint/img/avatar-large.png';
+      link = streamer.channel.url;
+      name = streamer.channel.display_name;
+      followers = streamer.channel.followers;
+      views = streamer.channel.views;
+      console.log(streamer.channel);
+
+      // bootstrap rows are being constructed.
+      renderFollowers.push(
+        '<div class="row center-block">' +
+          '<div class="link-effect">' +
+            '<div id="logo" class="col-xs-3 col-sm-2">' +
+              '<a href="' + link + '" target="_blank">' +
+                '<img src="' + logo + '">' +
+              '</a>' +
+            '</div>' +
+          '</div>' +
+        '<div id="title" class="col-xs-6 col-sm-8 center-block">' + name + '</div>' +
+          '<div id="status" class="col-xs-3 col-sm-1">' +
+            '<div id="' + name + '" ></div>' +
+          '</div>' +
+        '</div>' +
+        '</div>'
+      );
     });
+    // then bootstrap rows are being rendered here.
+    $('#fcc-followers-dropoff').html(renderFollowers.join(""));
+
+
+    streamers.forEach(function(streamer, index) {
+      let url = 'https://api.twitch.tv/kraken/streams/' + streamers[index].channel.name;
+      $.ajax({
+        type: 'GET',
+        url: url,
+        headers: { 'Client-ID': CLIENT_ID },
+        success: function(data) {
+          name = streamer.channel.display_name;
+          if (data.stream === null) { // if offline
+            $('#' + name).html('<i class="fa fa-bolt fa-3x" aria-hidden="true"></i>');
+          } else { // if onfine
+            $('#' + name).html('<i class="fa fa-globe fa-2x" aria-hidden="true"></i>');
+          }
+        }
+      });
+    })
+
   }
   // Get freeCodeCamp's followers
   function getFccFollowers() {
@@ -119,42 +159,7 @@ $(document).ready(function() {
       },
       async: true,
       success: function(data) {
-        var followers = data.follows;
-        var renderFollowers = [];
-        var logo, link, name, isOnline;
-        logo = link = name = [];
-
-        console.log(followers);
-        for (var i = 0; i < followers.length; i++) {
-          logo = followers[i].channel.logo || 'https://www.appointbetterboards.co.nz/Custom/Appoint/img/avatar-large.png';
-          link = followers[i].channel.url;
-          name = followers[i].channel.name;
-
-          renderFollowers.push(
-            '<div class="row center-block">' +
-            '<div class="link-effect">' +
-            '<div id="logo" class="col-xs-3 col-sm-2">' +
-            '<a href="' + link + '" target="_blank">' +
-            '<img src="' + logo + '">' +
-            '</a>' +
-            '</div>' +
-            '</div>' +
-            '<div id="title" class="col-xs-6 col-sm-8 center-block">' + name +
-            '</div>' +
-            '<div id="status" class="col-xs-3 col-sm-1">' +
-            '<div id="status"></div>' +
-            '</div>' +
-            '</div>' +
-            '</div>'
-          );
-          $('.fcc-followers-dropoff').html(renderFollowers.join(""));
-
-        } // End of parsing data for list of follow
-
-        // Update Status.
-        for (var i = 0; i < followers.length; i++) {
-          areUsersOnline(followers[i].channel.name);
-        }
+        areUsersOnline(data); // <--- Here's the callback.
       }
     });
   }
