@@ -46,8 +46,7 @@ $(document).ready(function() {
       // renderOfflineStreamer()
       // renderOnlineStreamer()
 
-  /* Have module accept name and generate corresponding render field through ajax requests.
-   */
+  /* Have module accept name and generate corresponding render field through ajax requests. */
   const StreamerInformation = (function() {
     const CLIENT_ID = 'sh9x4gbft40ht9pg5mk0p6sfvn1h3a';
     // TODO: Each of these methods will take an object of a user's information & return
@@ -59,27 +58,28 @@ $(document).ready(function() {
       '<div class="row center-block">' +
         '<div class="link-effect">' +
           '<div id="logo" class="col-xs-3 col-sm-2">' +
-            '<a href="' + streamer.link + '" target="_blank">' +
+            '<a href="' + streamer.url + '" target="_blank">' +
               '<img src="' + streamer.logo + '">' +
             '</a>' +
           '</div>' +
         '</div>' +
       '<div id="stream-body" class="col-xs-6 col-sm-8 center-block">' +
          '<h3>' + streamer.display_name + '</h3>' +
+         '<h3>' + "Followers: " + streamer.followers + '</h3>' +
+         '<h3>' + "Views: " + streamer.views + '</h3>' +
       '</div>' +
         '<div id="status" class="col-xs-3 col-sm-1">' +
           '<div id="' + streamer.name + '"><i class="fa fa-bolt fa-3x" aria-hidden="true"></i></div>' +
         '</div>' +
       '</div>' +
       '</div>';
-      return $(streamer.div).html(streamerHTML);
+      return $(streamer.div).append(streamerHTML); // append() is fucking amazing!!!
     }
     function _renderOnlineStreamer(streamer) {}
 
     /* STEP THREE: Since user is offline, we gather information to populate row */
     function getOfflineStreamerInformation(callbackData) {
       let url = "https://api.twitch.tv/kraken/users/" + callbackData.name;
-      let streamerObj = {};
 
       $.ajax({
         type: "GET",
@@ -88,7 +88,10 @@ $(document).ready(function() {
           'Client-ID': CLIENT_ID
         },
         success: function(data) {
-          data.link = callbackData.url;
+          data.logo = callbackData.logo || 'https://www.appointbetterboards.co.nz/Custom/Appoint/img/avatar-large.png';
+          data.views = callbackData.views;
+          data.followers = callbackData.followers;
+          data.url = callbackData.url;
           data.div = callbackData.div;
           console.log("offline", data);
           return _renderOfflineStreamer(data);
@@ -119,9 +122,6 @@ $(document).ready(function() {
       });
     }
 
-    function retrieveStreamerFollowers() {
-      
-    }
     // STEP ONE: Check if the specified streamer exists.
     function validateStreamer(streamerName, targetDiv) {
       let url = 'https://api.twitch.tv/kraken/channels/' + streamerName;
@@ -145,12 +145,30 @@ $(document).ready(function() {
       });
     }
 
+    function getStreamerFollowers(streamerName, targetDiv) {
+      let url = 'https://api.twitch.tv/kraken/users/' + streamerName + '/follows/channels';
+      $.ajax({
+        type: 'GET',
+        url: url,
+        headers: {
+          'Client-ID': CLIENT_ID
+        },
+        success: function(data) {
+          let followers = data.follows;
+          followers.forEach(function(streamer){
+            validateStreamer(streamer.channel.name, targetDiv);
+          });
+          console.log("IT WORKED", data);
+        }
+      });
+    }
+
     return {
-      validateStreamer: validateStreamer
+      validateStreamer: validateStreamer,
+      getStreamerFollowers: getStreamerFollowers
     };
   })();
 
-  StreamerInformation.validateStreamer(["freecodecamp"], "#freeCodeCamp");
-
-
+  StreamerInformation.validateStreamer("freecodecamp", "#freeCodeCamp")
+  StreamerInformation.getStreamerFollowers("freecodecamp", "#fcc-followers-dropoff");
 });
