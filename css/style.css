@@ -123,14 +123,14 @@
 
     }
 
-    #title {
+    #stream-body {
       border-top-right-radius: 15px;
       border-bottom-right-radius: 15px;
       border: 1px solid white;
       height: 80px;
     }
 
-    #title h3 {
+    #stream-body h3 {
       margin-top: 3px;
     }
 
@@ -171,13 +171,13 @@
         width: 1000px;
       }
       .tabcontent h3, p {
-        font-size: 3rem;
+        font-size: 2rem;
       }
       #logo img {
         width: 100px;
         height: 100px;
       }
-      #title {
+      #stream-body {
         height: 100px;
       }
       #status i {
