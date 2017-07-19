@@ -35,7 +35,6 @@ $(document).ready(function() {
 
 /* ========================================= */
 
-  // TODO: Make get requst to FreeCodeCamp to gather their followers.
   // TODO: Protocol for making GET requests for every streamer:
     // 1.) Check if their accounts exists with 'https://api.twitch.tv/kraken/channels/{streamer-name}'
       // If user doesn't exist, just place center text saying: {user} DNE or closed their account.
@@ -53,7 +52,6 @@ $(document).ready(function() {
     // jquery string to be rendered in the DOM.
     function _renderNonExistantStreamer(streamer) {}
     function _renderOfflineStreamer(streamer) {
-      console.log("offline renderer is firing off")
       let streamerHTML =
       '<div class="row center-block">' +
         '<div class="link-effect">' +
@@ -75,7 +73,28 @@ $(document).ready(function() {
       '</div>';
       return $(streamer.div).append(streamerHTML); // append() is fucking amazing!!!
     }
-    function _renderOnlineStreamer(streamer) {}
+    function _renderOnlineStreamer(streamer) {
+      let streamerHTML =
+      '<div class="row center-block">' +
+        '<div class="link-effect">' +
+          '<div id="logo" class="col-xs-3 col-sm-2">' +
+            '<a href="' + streamer.url + '" target="_blank">' +
+              '<img src="' + streamer.logo + '">' +
+            '</a>' +
+          '</div>' +
+        '</div>' +
+      '<div id="stream-body" class="col-xs-6 col-sm-8 center-block">' +
+         '<h3>' + streamer.display_name + '</h3>' +
+         '<h3>' + "Followers: " + streamer.followers + '</h3>' +
+         '<h3>' + "Views: " + streamer.views + '</h3>' +
+      '</div>' +
+        '<div id="status" class="col-xs-3 col-sm-1">' +
+          '<div id="' + streamer.name + '"><i class="fa fa-globe fa-2x" aria-hidden="true"></i></div>' +
+        '</div>' +
+      '</div>' +
+      '</div>';
+      return $(streamer.div).append(streamerHTML); // append() is fucking amazing!!!
+    }
 
     /* STEP THREE: Since user is offline, we gather information to populate row */
     function getOfflineStreamerInformation(callbackData) {
@@ -93,7 +112,7 @@ $(document).ready(function() {
           data.followers = callbackData.followers;
           data.url = callbackData.url;
           data.div = callbackData.div;
-          console.log("offline", data);
+          // console.log("offline", data);
           return _renderOfflineStreamer(data);
         }
 
@@ -110,10 +129,11 @@ $(document).ready(function() {
         },
         success: function(data) {
           console.log("STREAMER STATUS", data);
-          if (data.status == null) {
+          if (data.stream === null) {
             getOfflineStreamerInformation(callback);
           } else {
-            console.log("YOU NEED TO DO SOMETHING FOR ONLINE USER HERE!");
+            console.log("ONINE")
+            _renderOnlineStreamer(callback);
           }
         },
         error: function (failure) {
@@ -169,6 +189,6 @@ $(document).ready(function() {
     };
   })();
 
-  StreamerInformation.validateStreamer("freecodecamp", "#freeCodeCamp")
-  StreamerInformation.getStreamerFollowers("freecodecamp", "#fcc-followers-dropoff");
+  StreamerInformation.validateStreamer("ygtskedog", "#freeCodeCamp")
+  StreamerInformation.getStreamerFollowers("stpeach", "#fcc-followers-dropoff");
 });

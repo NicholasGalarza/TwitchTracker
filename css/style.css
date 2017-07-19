@@ -130,13 +130,13 @@
       min-height: 83px;
     }
 
-    #stream-body h3, blockquote{
+    #stream-body h3, blockquote {
       margin-top: 3px;
     }
 
     #status {
       display: table;
-      min-height: 83px;
+      min-height: 93px;
       width: 80px;
     }
 
@@ -183,5 +183,13 @@
       #status i {
         width: 100px;
         height: 100px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      #stream-body h3 {
+        display: inline;
+        padding-left: 5px;
+        padding-right: 5px;
       }
     }
