@@ -20,6 +20,15 @@
       text-align: center;
     }
 
+    .fa-exclamation {
+      color: #ff4444;
+    }
+
+    .fa-check {
+      color: #2efc00;
+    }
+
+
     header {
       background-color: white;
       margin: 0 auto;
@@ -29,6 +38,52 @@
       color: #6034b1;
       padding-top: 10px;
       font-family: 'Josefin Sans', sans-serif;
+    }
+
+    .search-section {
+      height: 60px;
+      border-bottom: 1px solid white;
+    }
+
+    .container-1 {
+      margin: auto;
+      width: 300px;
+      vertical-align: middle;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .container-1 input#search {
+      width: 300px;
+      outline: none;
+      height: 50px;
+      background: #5c4192;
+      border: none;
+      font-size: 10pt;
+      float: left;
+      color: white;
+      padding-left: 45px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+
+      -webkit-transition: background .55s ease;
+      -moz-transition: background .55s ease;
+      -ms-transition: background .55s ease;
+      -o-transition: background .55s ease;
+      transition: background .55s ease;
+    }
+
+    .container-1 input#search::-webkit-input-placeholder {
+      color: white;
+    }
+
+    .container-1 .icon {
+      position: absolute;
+      left: 5%;
+      margin-top: 15px;
+      z-index: 1;
+      color: white;
     }
 
     .display {
@@ -119,9 +174,7 @@
       width: 80px;
     }
 
-    #logo img:hover {
-
-    }
+    #logo img:hover {}
 
     #stream-body {
       border-top-right-radius: 15px;
@@ -132,6 +185,10 @@
 
     #stream-body h3, blockquote {
       margin-top: 3px;
+    }
+
+    #stream-body .online-status {
+      display: block;
     }
 
     #status {

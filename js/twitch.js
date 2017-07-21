@@ -67,7 +67,7 @@ $(document).ready(function() {
          '<h3>' + "Views: " + streamer.views + '</h3>' +
       '</div>' +
         '<div id="status" class="col-xs-3 col-sm-1">' +
-          '<div id="' + streamer.name + '"><i class="fa fa-bolt fa-3x" aria-hidden="true"></i></div>' +
+          '<div id="' + streamer.name + '"><i class="fa fa-exclamation fa-3x" aria-hidden="true"></i></div>' +
         '</div>' +
       '</div>' +
       '</div>';
@@ -85,11 +85,11 @@ $(document).ready(function() {
         '</div>' +
       '<div id="stream-body" class="col-xs-6 col-sm-8 center-block">' +
          '<h3>' + streamer.display_name + '</h3>' +
-         '<h3>' + "Followers: " + streamer.followers + '</h3>' +
-         '<h3>' + "Views: " + streamer.views + '</h3>' +
+         '<h3>' + streamer.game + '</h3>' +
+         '<h3 class="online-status">' + '"' + streamer.status + '"' + '</h3>' +
       '</div>' +
         '<div id="status" class="col-xs-3 col-sm-1">' +
-          '<div id="' + streamer.name + '"><i class="fa fa-globe fa-2x" aria-hidden="true"></i></div>' +
+          '<div id="' + streamer.name + '"><i class="fa fa-check fa-2x" aria-hidden="true"></i></div>' +
         '</div>' +
       '</div>' +
       '</div>';
@@ -112,7 +112,6 @@ $(document).ready(function() {
           data.followers = callbackData.followers;
           data.url = callbackData.url;
           data.div = callbackData.div;
-          // console.log("offline", data);
           return _renderOfflineStreamer(data);
         }
 
@@ -128,11 +127,9 @@ $(document).ready(function() {
           'Client-ID': CLIENT_ID
         },
         success: function(data) {
-          console.log("STREAMER STATUS", data);
           if (data.stream === null) {
             getOfflineStreamerInformation(callback);
           } else {
-            console.log("ONINE")
             _renderOnlineStreamer(callback);
           }
         },
@@ -152,7 +149,6 @@ $(document).ready(function() {
           'Client-ID': CLIENT_ID
         },
         success: function(data) {
-          console.log("IT WORKED", data);
           data.div = targetDiv;
           isStreamerOnline(data);
         },
@@ -160,13 +156,21 @@ $(document).ready(function() {
           let error = JSON.parse(failure.responseText);
           error.div = targetDiv;
           error.name = streamerName;
-          console.log("ERROR", error);
         }
       });
     }
 
-    function getStreamerFollowers(streamerName, targetDiv) {
-      let url = 'https://api.twitch.tv/kraken/users/' + streamerName + '/follows/channels';
+    function getStreamersList(streamerName, targetDiv, options) {
+      let url = "";
+      if (options === "FOLLOWERS") {
+        url = 'https://api.twitch.tv/kraken/users/' + streamerName + '/follows/channels';
+      } else if (options === 'FEATURED') {
+        url = 'https://api.twitch.tv/kraken/streams/featured';
+      } else if (options === 'POPULAR') {
+        streamerName.forEach(function(streamer) {
+          validateStreamer(streamer, targetDiv);
+        });
+      }
       $.ajax({
         type: 'GET',
         url: url,
@@ -174,21 +178,31 @@ $(document).ready(function() {
           'Client-ID': CLIENT_ID
         },
         success: function(data) {
-          let followers = data.follows;
-          followers.forEach(function(streamer){
-            validateStreamer(streamer.channel.name, targetDiv);
-          });
-          console.log("IT WORKED", data);
+          if (options === "FOLLOWERS") {
+            // Followers of specific stream.
+            data.follows.forEach(function(streamer) {
+              validateStreamer(streamer.channel.name, targetDiv);
+            });
+          } else if (options === "FEATURED") {
+            // Featured Streams.
+            data.featured.forEach(function(streamer) {
+              streamer.stream.channel.div = targetDiv;
+              _renderOnlineStreamer(streamer.stream.channel)
+            });
+          }
         }
       });
     }
 
     return {
       validateStreamer: validateStreamer,
-      getStreamerFollowers: getStreamerFollowers
+      getStreamersList: getStreamersList
     };
   })();
 
-  StreamerInformation.validateStreamer("ygtskedog", "#freeCodeCamp")
-  StreamerInformation.getStreamerFollowers("stpeach", "#fcc-followers-dropoff");
+  StreamerInformation.validateStreamer("freecodecamp", "#freeCodeCamp")
+  StreamerInformation.getStreamersList("freecodecamp", "#freeCodeCamp", "FOLLOWERS");
+  let popularStreamers = ['ygtskedog', 'stpeach', 'dyrus', 'loltyler1', 'imaqtpie', 'kaypealol', 'greekgodx', 'ice_posiedon', 'andymilonakis', 'itshafu'];
+  StreamerInformation.getStreamersList(popularStreamers, '#popularStreamerList', "POPULAR");
+  StreamerInformation.getStreamersList("", '#featuredStreamerList', "FEATURED");
 });
