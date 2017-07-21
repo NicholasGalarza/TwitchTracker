@@ -205,4 +205,15 @@ $(document).ready(function() {
   let popularStreamers = ['ygtskedog', 'stpeach', 'dyrus', 'loltyler1', 'imaqtpie', 'kaypealol', 'greekgodx', 'ice_posiedon', 'andymilonakis', 'itshafu'];
   StreamerInformation.getStreamersList(popularStreamers, '#popularStreamerList', "POPULAR");
   StreamerInformation.getStreamersList("", '#featuredStreamerList', "FEATURED");
+
+  // Allow a user to enter a user to get their information and followers.
+  $('#search').keypress(function(e) {
+    let keyCode = e.keyCode || e.which;
+      if (keyCode == '13') {
+        let streamer = $('#search').val().toLowerCase();
+        $('#freeCodeCamp').empty(); 
+        StreamerInformation.validateStreamer(streamer, "#freeCodeCamp")
+        StreamerInformation.getStreamersList(streamer, "#freeCodeCamp", "FOLLOWERS");
+      }
+  });
 });
