@@ -213,7 +213,7 @@ $(document).ready(function() {
 
   StreamerInformation.validateStreamer("freecodecamp", "#freeCodeCamp")
   StreamerInformation.getStreamersList("freecodecamp", "#freeCodeCamp", "FOLLOWERS");
-  let popularStreamers = ['ygtskedog', 'stpeach', 'dyrus', 'loltyler1', 'imaqtpie', 'kaypealol', 'greekgodx', 'ice_posiedon', 'andymilonakis', 'itshafu'];
+  let popularStreamers = ['ygtskedog', 'stpeach', 'dyrus', 'loltyler1', 'imaqtpie', 'kaypealol', 'greekgodx', 'reynad27', 'andymilonakis', 'itshafu'];
   StreamerInformation.getStreamersList(popularStreamers, '#popularStreamerList', "POPULAR");
   StreamerInformation.getStreamersList("", '#featuredStreamerList', "FEATURED");
 

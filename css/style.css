@@ -165,7 +165,11 @@
     }
 
     .streamer-name {
+      padding-top: 5px; 
       display: block;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 60px;
+      font-weight: bold;
     }
 
     #logo img {
