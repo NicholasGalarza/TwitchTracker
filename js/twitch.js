@@ -53,8 +53,12 @@ $(document).ready(function() {
     function _renderNonExistantStreamer(streamer) {
       let streamerHTML =
       '<div class="row center-block">' +
-        '<p>ERROR: ' + streamer + " is either banned, doesn't exist, or you misspelled the user" + '</p>';
+        '<div id="stream-body" class="col-xs-12 center-block">' +
+          '<div>ERROR: ' + streamer.error + '</div>' +
+          '<div>' + streamer.name  + " is either banned, does not exist, or you misspelled the streamer's name." + '</div>' +
+        '</div>' +
       '</div>';
+      console.log("is this launching?", streamer);
       return $(streamer.div).append(streamerHTML);
     }
     function _renderOfflineStreamer(streamer) {
@@ -140,7 +144,7 @@ $(document).ready(function() {
           }
         },
         error: function (failure) {
-          console.log("STREAM STATUS FAILURE", failure);
+          console.log("SOMETHING WENT WRONG", failure);
         }
       });
     }
@@ -162,6 +166,7 @@ $(document).ready(function() {
           let error = JSON.parse(failure.responseText);
           error.div = targetDiv;
           error.name = streamerName;
+          _renderNonExistantStreamer(error);
         }
       });
     }
