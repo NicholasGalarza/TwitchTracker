@@ -1,7 +1,7 @@
 'use strict'
 $(document).ready(function() {
   function getTwitchStreamers(clickEvent, streamList) {
-    var i, tabcontent, tablinks;
+    let i, tabcontent, tablinks;
 
     // Get all elements with class="tabcontent" and hide them
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -50,7 +50,13 @@ $(document).ready(function() {
     const CLIENT_ID = 'sh9x4gbft40ht9pg5mk0p6sfvn1h3a';
     // TODO: Each of these methods will take an object of a user's information & return
     // jquery string to be rendered in the DOM.
-    function _renderNonExistantStreamer(streamer) {}
+    function _renderNonExistantStreamer(streamer) {
+      let streamerHTML =
+      '<div class="row center-block">' +
+        '<p>ERROR: ' + streamer + " is either banned, doesn't exist, or you misspelled the user" + '</p>';
+      '</div>';
+      return $(streamer.div).append(streamerHTML);
+    }
     function _renderOfflineStreamer(streamer) {
       let streamerHTML =
       '<div class="row center-block">' +
@@ -62,7 +68,7 @@ $(document).ready(function() {
           '</div>' +
         '</div>' +
       '<div id="stream-body" class="col-xs-6 col-sm-8 center-block">' +
-         '<h3>' + streamer.display_name + '</h3>' +
+         '<h3 class="streamer-name">' + streamer.display_name + '</h3>' +
          '<h3>' + "Followers: " + streamer.followers + '</h3>' +
          '<h3>' + "Views: " + streamer.views + '</h3>' +
       '</div>' +
@@ -84,12 +90,12 @@ $(document).ready(function() {
           '</div>' +
         '</div>' +
       '<div id="stream-body" class="col-xs-6 col-sm-8 center-block">' +
-         '<h3>' + streamer.display_name + '</h3>' +
+         '<h3 class="streamer-name">' + streamer.display_name + '</h3>' +
          '<h3>' + streamer.game + '</h3>' +
          '<h3 class="online-status">' + '"' + streamer.status + '"' + '</h3>' +
       '</div>' +
         '<div id="status" class="col-xs-3 col-sm-1">' +
-          '<div id="' + streamer.name + '"><i class="fa fa-check fa-2x" aria-hidden="true"></i></div>' +
+          '<div id="' + streamer.name + '"><i class="fa fa-check fa-lg" aria-hidden="true"></i></div>' +
         '</div>' +
       '</div>' +
       '</div>';
@@ -97,7 +103,7 @@ $(document).ready(function() {
     }
 
     /* STEP THREE: Since user is offline, we gather information to populate row */
-    function getOfflineStreamerInformation(callbackData) {
+    function _getOfflineStreamerInformation(callbackData) {
       let url = "https://api.twitch.tv/kraken/users/" + callbackData.name;
 
       $.ajax({
@@ -118,7 +124,7 @@ $(document).ready(function() {
       });
     }
     // STEP TWO: Check if streamer is currently online.
-    function isStreamerOnline(callback) {
+    function _isStreamerOnline(callback) {
       let url = 'https://api.twitch.tv/kraken/streams/' + callback.name;
       $.ajax({
         type: 'GET',
@@ -128,7 +134,7 @@ $(document).ready(function() {
         },
         success: function(data) {
           if (data.stream === null) {
-            getOfflineStreamerInformation(callback);
+            _getOfflineStreamerInformation(callback);
           } else {
             _renderOnlineStreamer(callback);
           }
@@ -150,7 +156,7 @@ $(document).ready(function() {
         },
         success: function(data) {
           data.div = targetDiv;
-          isStreamerOnline(data);
+          _isStreamerOnline(data);
         },
         error: function (failure) {
           let error = JSON.parse(failure.responseText);
@@ -211,7 +217,7 @@ $(document).ready(function() {
     let keyCode = e.keyCode || e.which;
       if (keyCode == '13') {
         let streamer = $('#search').val().toLowerCase();
-        $('#freeCodeCamp').empty(); 
+        $('#freeCodeCamp').empty();
         StreamerInformation.validateStreamer(streamer, "#freeCodeCamp")
         StreamerInformation.getStreamersList(streamer, "#freeCodeCamp", "FOLLOWERS");
       }

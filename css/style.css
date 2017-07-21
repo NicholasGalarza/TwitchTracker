@@ -28,7 +28,6 @@
       color: #2efc00;
     }
 
-
     header {
       background-color: white;
       margin: 0 auto;
@@ -66,7 +65,6 @@
       -webkit-border-radius: 5px;
       -moz-border-radius: 5px;
       border-radius: 5px;
-
       -webkit-transition: background .55s ease;
       -moz-transition: background .55s ease;
       -ms-transition: background .55s ease;
@@ -166,15 +164,25 @@
       color: white;
     }
 
+    .streamer-name {
+      display: block;
+    }
+
     #logo img {
       border-top-left-radius: 15px;
       border-bottom-left-radius: 15px;
       border: 1px solid white;
       height: 83px;
-      width: 80px;
+      width: 70px;
+      opacity: 1;
+      transition: opacity .25s ease-in-out;
+      -moz-transition: opacity .25s ease-in-out;
+      -webkit-transition: opacity .25s ease-in-out;
     }
 
-    #logo img:hover {}
+    #logo img:hover {
+      opacity: 0.4;
+    }
 
     #stream-body {
       border-top-right-radius: 15px;
@@ -187,7 +195,7 @@
       margin-top: 3px;
     }
 
-    #stream-body .online-status {
+    #stream-body .online-status, #stream-body .streamer-name {
       display: block;
     }
 
